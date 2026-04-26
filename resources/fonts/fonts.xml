@@ -1,0 +1,6 @@
+<fonts>
+    <font id="Eurostar" filename="eurostar.fnt" antialias="true" />
+    <font id="NumbersFont" filename="numbers_font.fnt" antialias="true" />
+    <font id="SmallNumbersFont" filename="small_numbers_font.fnt" antialias="true" />
+    <font id="Led" filename="led.fnt" antialias="false" />
+</fonts>
