@@ -1,23 +1,34 @@
 <layout id="WatchFace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
-    <label id="WeatherLabelBg" x="227" y="45" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#543601" />
-    <label id="WeatherLabel"   x="227" y="45" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#FFA400" />
+    <label id="WeatherLabelBg" x="227" y="25" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#674100" />
+    <label id="WeatherLabel"   x="227" y="25" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#FFA400" />
 
-    <label id="AltDateLabel" x="395" y="95" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="FFA400" />
-    <label id="WeekDayLabel" x="70" y="140" font="@Fonts.SmallNumbersFont" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_BLACK" text="*"/>
+    <label id="LeftLabel"      x="110" y="67" font="@Fonts.Eurostar" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" text="SUNRISE"/>
+    <label id="LeftValLabelBg" x="110" y="85" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#674100"/>
+    <label id="LeftValLabel"   x="110" y="85" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#FFA400" />
+
+    <label id="RightLabel"      x="344" y="67" font="@Fonts.Eurostar" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" text="SUNSET"/>
+    <label id="RightValLabelBg" x="344" y="85" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#674100"/>
+    <label id="RightValLabel"   x="344" y="85" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#FFA400" />
+    
+    <label id="WeekLabelBg"  x="200" y="140" font="@Fonts.SmallNumbersFont" justification="Graphics.TEXT_JUSTIFY_LEFT" color="#674100" text="**"/>
+    <label id="WeekLabel"    x="200" y="140" font="@Fonts.SmallNumbersFont" justification="Graphics.TEXT_JUSTIFY_LEFT" color="#FFA400" />
+
+    <label id="DateLabelBg"    x="395" y="140" font="@Fonts.SmallNumbersFont" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="#583800" text="88-88"/>
     <label id="DateLabel"    x="395" y="140" font="@Fonts.SmallNumbersFont" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="#FFA400" />
-    <label id="TimeLabelBg"  x="227" y="178" font="@Fonts.NumbersFont" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#301F00" text="88:88" />
+
+    <label id="TimeLabelBg"  x="227" y="178" font="@Fonts.NumbersFont" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#543601" text="88:88" />
     <label id="TimeLabel"    x="227" y="178" font="@Fonts.NumbersFont" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#FFA400" />
     
-    <label id="StepsLabel"      x="105" y="340" font="@Fonts.Eurostar" justification="Graphics.TEXT_JUSTIFY_CENTER" color="FFA400" text="STEPS"/>
-    <label id="StepsValLabelBg" x="105" y="358" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#543601" />
+    <label id="StepsLabel"      x="105" y="340" font="@Fonts.Eurostar" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" text="STEPS"/>
+    <label id="StepsValLabelBg" x="105" y="358" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#674100" />
     <label id="StepsValLabel"   x="105" y="358" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#FFA400" />
     
-    <label id="NotifsLabel"      x="227" y="340" font="@Fonts.Eurostar" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#FFA400" text="NOTIFS"/>
-    <label id="NotifsValLabelBg" x="227" y="358" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#543601" />
+    <label id="NotifsLabel"      x="227" y="340" font="@Fonts.Eurostar" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" text="NOTIFS"/>
+    <label id="NotifsValLabelBg" x="227" y="358" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#674100" />
     <label id="NotifsValLabel"   x="227" y="358" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#FFA400" />
     
-    <label id="FloorsLabel"      x="349" y="340" font="@Fonts.Eurostar" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#FFA400" text="FLOORS"/>
-    <label id="FloorsValLabelBg" x="349" y="358" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#543601" />
+    <label id="FloorsLabel"      x="349" y="340" font="@Fonts.Eurostar" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_WHITE" text="FLOORS"/>
+    <label id="FloorsValLabelBg" x="349" y="358" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#674100" />
     <label id="FloorsValLabel"   x="349" y="358" font="@Fonts.Led" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#FFA400" />
 
     <label id="BatteryLabel"     x="227" y="400" font="@Fonts.Eurostar" justification="Graphics.TEXT_JUSTIFY_CENTER" color="Graphics.COLOR_RED" text="%"/>

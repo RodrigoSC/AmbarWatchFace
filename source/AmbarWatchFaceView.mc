@@ -1,3 +1,4 @@
+import Toybox.Activity;
 import Toybox.ActivityMonitor;
 import Toybox.Application;
 import Toybox.Graphics;
@@ -25,6 +26,12 @@ class AmbarWatchFaceView extends WatchUi.WatchFace {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
+    }
+
+    function formatDayOfWeek() as String {
+        var day = Gregorian.info(Time.now(), Time.FORMAT_SHORT).day_of_week;
+        var days = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
+        return days[day-1];
     }
 
     function formatDate() as String {
@@ -68,20 +75,26 @@ class AmbarWatchFaceView extends WatchUi.WatchFace {
         (View.findDrawableById(fieldId) as Text).setText(value);
     }
 
-    function getWeekDayPosition() as Number {
-        var today = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
-        var pos = [77, 113, 140, 175, 202, 230, 258];
-        return pos[today.day_of_week - 1];
-    }
-
     function updateWeather() {
         var cc = Weather.getCurrentConditions();
+        var loc = cc.observationLocationPosition;
         if (cc != null) {
+            var now = Time.now();
             weather["Temp"] = cc.temperature as Number;
             weather["WindBear"] = cc.windBearing as Number;
             weather["WindSpeed"] = cc.windSpeed as Number;
             weather["Rain"] = cc.precipitationChance as Number;
+            weather["Sunrise"] = loc == null? null : Weather.getSunrise(loc, now);
+            weather["Sunset"] = loc == null? null : Weather.getSunset(loc, now);
         }
+    }
+
+    function formatSunTime(moment as Time.Moment?) as String {
+        if (moment == null) { return "--:--"; }
+        var info = Gregorian.info(moment, Time.FORMAT_SHORT);
+        var hh = info.hour < 10 ? "0" + info.hour.toString() : info.hour.toString();
+        var mm = info.min < 10 ? "0" + info.min.toString() : info.min.toString();
+        return hh + ":" + mm;
     }
 
     function getWindChar(windBear as Number) as String {
@@ -122,18 +135,24 @@ class AmbarWatchFaceView extends WatchUi.WatchFace {
 
         var altOffset = Application.Properties.getValue("AltTimezoneOffset") as Number?;
 
-        var dateStr = (altOffset != null && altOffset != -9999)
-            ? formatAltTimezone(altOffset)
-            : formatDate();
-        (View.findDrawableById("DateLabel") as Text).setText(dateStr);
-
-        var wdText = (View.findDrawableById("WeekDayLabel") as Text);
-        wdText.setLocation(getWeekDayPosition(), wdText.locY);
-
-        var altDateStr = (altOffset != null && altOffset != -9999)
-            ? formatDate()
-            : "";
-        (View.findDrawableById("AltDateLabel") as Text).setText(altDateStr);
+        (View.findDrawableById("DateLabel") as Text).setText(formatDate());
+        (View.findDrawableById("WeekLabel") as Text).setText(formatDayOfWeek());
+        
+        if (altOffset != null && altOffset != -9999) {
+            (View.findDrawableById("LeftLabel") as Text).setText("SUNSET");
+            writeToLED("LeftValLabel",formatSunTime(weather["Sunset"]));    
+        } else {
+            (View.findDrawableById("LeftLabel") as Text).setText("SUNRISE");
+            writeToLED("LeftValLabel",formatSunTime(weather["Sunrise"]));    
+        }
+        
+        if (altOffset != null && altOffset != -9999) {
+            (View.findDrawableById("RightLabel") as Text).setText("TIME");
+            writeToLED("RightValLabel",formatAltTimezone(altOffset));    
+        } else {
+            (View.findDrawableById("RightLabel") as Text).setText("SUNSET");
+            writeToLED("RightValLabel",formatSunTime(weather["Sunset"]));
+        }
 
         // Format time as HH:MM
         var timeStr = (hour / 10).toString() + (hour % 10).toString() + ":" +
@@ -159,7 +178,7 @@ class AmbarWatchFaceView extends WatchUi.WatchFace {
         var rw = dc.getWidth() - rx * 2;
         var rh = dc.getHeight() - ry * 2;
         var offset = 10;
-        dc.setColor(0xFFA400, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(0x0376BB, Graphics.COLOR_TRANSPARENT);
         dc.setPenWidth(3);
         dc.drawRoundedRectangle(rx, ry, rw, rh, rr);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);

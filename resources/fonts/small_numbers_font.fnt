@@ -1,7 +1,7 @@
 info face="SmallNumbersFont" size=25 bold=0 italic=0 smooth=1 spacing=1,1
-common lineHeight=38 base=38 scaleW=310 scaleH=38 pages=1
+common lineHeight=38 base=38 scaleW=610 scaleH=38 pages=1
 page id=0 file="small_numbers_font.png"
-chars count=13
+chars count=22
 
 char id=48  x=0    y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
 char id=49  x=25   y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
@@ -15,4 +15,16 @@ char id=56  x=200  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=
 char id=57  x=225  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
 char id=58  x=253  y=0  width=7  height=38 xoffset=0 yoffset=0 xadvance=7  page=0
 char id=45  x=263  y=0  width=14 height=38 xoffset=0 yoffset=0 xadvance=14 page=0
-char id=42  x=284  y=14 width=26 height=10 xoffset=0 yoffset=0 xadvance=26 page=0
+
+char id=42  x=299  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=65  x=322  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=69  x=345  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=70  x=368  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=72  x=391  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=77  x=414  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=79  x=437  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=82  x=460  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=83  x=483  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=84  x=506  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=85  x=529  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
+char id=87  x=552  y=0  width=23 height=38 xoffset=0 yoffset=0 xadvance=23 page=0
