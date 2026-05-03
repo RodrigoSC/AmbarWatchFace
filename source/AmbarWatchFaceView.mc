@@ -57,7 +57,7 @@ class AmbarWatchFaceView extends WatchUi.WatchFace {
         if (nbr == null) {
             res = "--";
         } else if (nbr >= 1000) {
-            res = (nbr / 1000).toString() + "." + ((nbr % 1000) / 100).toString() + "K";
+            res = (nbr / 1000).toString() + "." + ((nbr % 1000) / 100).toString() + "k";
         } else {
             res = nbr.toString();
         }
@@ -84,8 +84,23 @@ class AmbarWatchFaceView extends WatchUi.WatchFace {
             weather["WindBear"] = cc.windBearing as Number;
             weather["WindSpeed"] = cc.windSpeed as Number;
             weather["Rain"] = cc.precipitationChance as Number;
-            weather["Sunrise"] = loc == null? null : Weather.getSunrise(loc, now);
-            weather["Sunset"] = loc == null? null : Weather.getSunset(loc, now);
+            if (loc != null) {
+                var sunrise = Weather.getSunrise(loc, now);
+                var sunset = Weather.getSunset(loc, now);
+                if (sunrise.lessThan(now)) { 
+                    //if sunrise was already, take tomorrows
+                    sunrise = Weather.getSunrise(loc, Time.today().add(new Time.Duration(86401)));
+                }
+                if (sunset.lessThan(now)) { 
+                    //if sunset was already, take tomorrows
+                    sunset = Weather.getSunset(loc, Time.today().add(new Time.Duration(86401)));
+                }
+                weather["Sunrise"] = sunrise;
+                weather["Sunset"] = sunset;
+            } else {
+                weather["Sunrise"] = null;
+                weather["Sunset"] = null;
+            }
         }
     }
 
@@ -123,10 +138,10 @@ class AmbarWatchFaceView extends WatchUi.WatchFace {
         }
 
         if (weather["Temp"] != null) {
-            var tempData = weather["Temp"].format("%d") + "ª";
+            var tempData = weather["Temp"].format("%d") + "ª ";
             if (weather["WindSpeed"] != null && weather["WindBear"] != null) {
-                tempData += " " + getWindChar(weather["WindBear"]) + weather["WindSpeed"].format("%d") + " ";
-            }            
+                tempData += weather["WindSpeed"].format("%d") + getWindChar(weather["WindBear"]) + " ";
+            }
             if (weather["Rain"] != null) {
                 tempData += weather["Rain"] + "%";
             }
@@ -139,19 +154,16 @@ class AmbarWatchFaceView extends WatchUi.WatchFace {
         (View.findDrawableById("WeekLabel") as Text).setText(formatDayOfWeek());
         
         if (altOffset != null && altOffset != -9999) {
-            (View.findDrawableById("LeftLabel") as Text).setText("SUNSET");
-            writeToLED("LeftValLabel",formatSunTime(weather["Sunset"]));    
+            (View.findDrawableById("TopLabel") as Text).setText("TIME");
+            writeToLED("TopValLabel",formatAltTimezone(altOffset));    
         } else {
-            (View.findDrawableById("LeftLabel") as Text).setText("SUNRISE");
-            writeToLED("LeftValLabel",formatSunTime(weather["Sunrise"]));    
-        }
-        
-        if (altOffset != null && altOffset != -9999) {
-            (View.findDrawableById("RightLabel") as Text).setText("TIME");
-            writeToLED("RightValLabel",formatAltTimezone(altOffset));    
-        } else {
-            (View.findDrawableById("RightLabel") as Text).setText("SUNSET");
-            writeToLED("RightValLabel",formatSunTime(weather["Sunset"]));
+            if (weather["Sunrise"].lessThan(weather["Sunset"])) {
+                (View.findDrawableById("TopLabel") as Text).setText("SUNRISE");
+                writeToLED("TopValLabel",formatSunTime(weather["Sunrise"]));
+            } else {
+                (View.findDrawableById("TopLabel") as Text).setText("SUNSET");
+                writeToLED("TopValLabel",formatSunTime(weather["Sunset"]));
+            }
         }
 
         // Format time as HH:MM
